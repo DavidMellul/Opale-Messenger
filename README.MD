@@ -32,7 +32,7 @@ Toggle chat window     | <kbd>Alt</kbd> <kbd>A</kbd>
 
 ## Install
 
-```
+```sh
 $ git clone https://github.com/DavidMellul/Opale-Messenger.git
 $ cd Opale-Messenger
 $ npm start
