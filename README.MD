@@ -52,7 +52,7 @@ Since Electron is cross-platform, it should also work well on Mac OS X but I can
 <p align="justify">Till now (the 20 January 2017 when I'm writing) the only installer I've been making (with electron-packager and innoSetup) is for Windows 32 bits, so that it works on both operating systems no matter it's architecture is wheter x86 or x64.</p>
 
 <strong>Installer for Windows 32-64 bits : http://dmware.fr/opale/opale_setup.exe</strong> <br />
-<strong>Important :  Your antivirus may consider checking the installer and the launcher the first time, nevermind I didn't sign my software, nothing to worry about.</strong>
+<strong>Important:  Your antivirus may consider checking the installer and the launcher the first time, nevermind I didn't sign my software, nothing to worry about.</strong>
 
 
 ## Further improvements
