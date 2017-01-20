@@ -55,8 +55,8 @@ Since Electron is cross-platform, it should also work well on Mac OS X but I can
 ## Further improvements
 
 
-I would be very glad if someone could give me a feedback or just tell me how I could simply improve.
-I would consider being a lot more greatful if someone  could package the app so that users could use Opale Messenger on both Windows and Mac (Linux maybe ?) with an installer. ( ---> Further teamworking on cool projects ?)
+I would be very glad if someone could give me a feedback or just tell me how I could simply improve. <br />
+I would consider being a lot more greatful if someone  could package the app so that users could use Opale Messenger on both Windows and Mac (Linux maybe ?) with an installer. (<strong> ---> Further teamworking on cool projects ?</strong>)
 
 ## Bugs and Issues
 
