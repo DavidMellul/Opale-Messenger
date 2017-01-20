@@ -11,6 +11,9 @@ can play with on your Android smartphone, Opale does the same old trick on your 
 how many conversations you've missed, and it blinks when you get incoming messages. It's really useful when you're
 multi-tasking and you just don't want to switch between tabs or windows slowly since it's a pain. </p>
 
+<h1 align='center'>
+<img alt='Opale-Messenger' src='./images/screen.png'>
+</h1>
 
 ## Features
 
