@@ -43,7 +43,7 @@ $ npm start
 
 ## Platforms supported
 
-Since I'm developing Opale Messenger on Windows, everything should work fine on anyWindows OS.
+Since I'm developing Opale Messenger on Windows, everything should work fine on anyWindows OS. <br />
 Since Electron is cross-platform, it should also work well on Mac OS X but I can't ensure it.
 
 
