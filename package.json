@@ -1,0 +1,29 @@
+{
+    "name": "Opale",
+    "version": "2.0.0",
+    "description": "A new way to chat online with Messenger.",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "keywords": [
+    "Opale",
+    "Messenger",
+    "Transparent",
+    "Wrapper"
+  ],
+    "author": "David Mellul",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^1.4.1",
+        "electron-packager": "^8.5.0",
+        "electron-rebuild": "^1.5.6",
+        "electron-settings": "^2.2.2",
+        "electron-context-menu": "^0.8.0"
+    },
+    "dependencies": {
+        "electron-context-menu": "^0.8.0",
+        "electron-settings": "^2.2.2"
+    },
+    "productName": "Opale"
+}

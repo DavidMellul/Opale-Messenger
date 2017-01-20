@@ -1,0 +1,22 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+#XMessengerDotComLoginViewPlaceholder > div {
+    display:block;
+    margin-top: 30px;
+}
+
+#XMessengerDotComLoginViewPlaceholder > div > div._210n {
+    display: none !important;
+}
+
+
+/* Hide the scrollbar as it's inesthetic in my point of view */ 
+::-webkit-scrollbar {
+    display:none;
+}
+
+

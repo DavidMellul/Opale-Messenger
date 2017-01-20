@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <!--------------------------------------------------------- My style ----------------------------------------------------------!-->
+    <link rel="stylesheet" type="text/css" href="css/bubble.css" />
+
+    <!--------------------------------------------------------- Icons ----------------------------------------------------------!-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+    <title>Opale</title>
+</head>
+
+<body>
+    <!--------------------------------------------------------- Loader ----------------------------------------------------------!-->
+    <div id="main">
+        <div id="mainContent">
+            <button class="fa fa-diamond">
+                <a class="drag-element"></a>
+            </button>
+            <br />
+            <div class="conv-number">0</div>
+        </div>
+    </div>
+
+
+    <!--------------------------------------------------------- Script part & JQuery ----------------------------------------------------------!-->
+    <script src="./main.js"></script>
+    <script>
+        window.$ = window.jQuery = window.jquery = require("./js/jquery-3.1.1.min.js");
+    </script>
+    <script>
+        const remote = require('electron').remote;
+        let wX;
+        let wY;
+        let dragging = false;
+        let buttonClicked = false;
+    </script>
+    <!--------------------------------------------------------- IPC part ----------------------------------------------------------!-->
+    <script>
+        const {
+            ipcRenderer
+        } = require('electron');
+        // Signal for when the button is clicked so that the window messenger appear
+        $('button').click(() => {
+            ipcRenderer.send('toggle-window');
+            $('button').removeClass('blink');
+            $('.conv-number').css('display','none');
+        });
+        ipcRenderer.on('new-message', (event, arg) => {
+            $('button').addClass('blink');
+            if(arg.trim())
+                $('.conv-number').html(arg).css('display','block');
+            else
+                $('.conv-number').html(arg).css('display','none');
+        });
+        ipcRenderer.on('stop-blink', () => {
+            $('button').removeClass('blink');
+        });
+        ipcRenderer.on('hide-window', () => {
+            $('button').click();
+        });
+    </script>
+    <!--------------------------------------------------------- Handle bubble drag ----------------------------------------------------------!-->
+    <script>
+        $('body').mousedown(function (e) {
+            dragging = true;
+            wX = e.pageX;
+            wY = e.pageY;
+        });
+        $('button').mousedown(() => {
+            buttonClicked = true;
+        });
+        $(window).mousemove(function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            if (dragging && !buttonClicked) {
+                var xLoc = e.screenX - wX;
+                var yLoc = e.screenY - wY;
+                try {
+                    remote.BrowserWindow.getFocusedWindow().setPosition(xLoc, yLoc);
+                } catch (err) {}
+            }
+        });
+
+        $(window).mouseup(function () {
+            dragging = false;
+            buttonClicked = false;
+        });
+    </script>
+
+
+</body>
+
+
+</html>

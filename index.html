@@ -1,0 +1,240 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--------------------------------------------------------- My style ----------------------------------------------------------!-->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <!--------------------------------------------------------- Icons ----------------------------------------------------------!-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <!--------------------------------------------------------- Animations ----------------------------------------------------------!-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+    <title>Opale</title>
+</head>
+
+<body>
+    <!--------------------------------------------------------- Title Bar ----------------------------------------------------------!-->
+    <div class="titleBar">
+        <div class="windowHeader"></div>
+        <div class="windowTitle">Opale</div>
+        <div class="windowControls">
+            <button class="fa fa-window-minimize" aria-hidden="true" onClick="require('electron').remote.getCurrentWindow().blur();"></button>
+            <button class="fa fa-window-maximize" aria-hidden="true" onClick="const {ipcRenderer} = require('electron'); ipcRenderer.send('maximize-window');"></button>
+            <button class="fa fa-close" aria-hidden="true" onClick="require('electron').remote.getCurrentWindow().blur();
+                                                                    const {ipcRenderer} = require('electron'); 
+                                                                    ipcRenderer.send('reset-window-pos');"></button>
+        </div>
+        <div class="windowSettings">
+            <button class="fa fa-bars" aria-hidden="true" onclick="toggled = !toggled; 
+                                                                       if(!toggled)
+                                                                        $('#settingsPanel').removeClass('animated slideInLeft').addClass('animated slideOutLeft');
+                                                                       else             
+                                                                        $('#settingsPanel').removeClass('animated slideOutLeft invisible').addClass('animated slideInLeft');"></button>
+        </div>
+    </div>
+
+    <!--------------------------------------------------------- Loader ----------------------------------------------------------!-->
+    <div class="loader-inside" id="loader">
+        <div class="loader-small-circles">
+        </div>
+        <div class="loader-small-circles">
+        </div>
+        <div class="loader-small-circles">
+        </div>
+        <div class="loader-small-circles">
+        </div>
+        <div class="loader-small-circles">
+        </div>
+    </div>
+
+    <!--------------------------------------------------------- Webview ----------------------------------------------------------!-->
+    <div id="webviewWrapper" class="invisible">
+        <webview src="https://messenger.com/login" id="webview" autosize="on"></webview>
+    </div>
+
+    <!--------------------------------------------------------- Settings panel ----------------------------------------------------------!-->
+    <div id="settingsPanel" class="invisible">
+        <div class="settingsHeader">
+            <h2>Settings</h2>
+            <button onclick="$('.windowSettings button').click();">&times;</button>
+        </div>
+        <table class="settingsControls">
+            <tr>
+                <td class="controlTitle">Remember my account informations</td>
+                <td>
+                    <ul class="choice-list" id="list_1">
+                        <li class="checkbox check" onclick="$('#accountModal').attr('data-visible','true');"></li>
+                        <li class="checkbox cross" onclick="resetLoginAndPassword(); 
+                                                            if(!$('#list_2 .cross').hasClass('is-checked')) 
+                                                                $('#list_2 .cross').click();"></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="controlTitle">Log in automatically when application starts</td>
+                <td>
+                    <ul class="choice-list" id="list_2">
+                        <li class="checkbox check" onclick="if(!$('#list_1 .check').hasClass('is-checked')) {
+                                                                setTimeout(() => { $(this).toggleClass('is-checked'); },200);
+                                                                $('#list_2 .cross').click();
+                                                            }else
+                                                                setAutoLog('true');"></li>
+                            <li class="checkbox cross" onclick="setAutoLog('false');"></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!--------------------------------------------------------- Settings Modals ----------------------------------------------------------!-->
+    <div id="accountModal" class="modal" data-visible="false">
+        <div>
+            <div class="login-page">
+                <button id="closeAccountModal" onclick="$('#accountModal').attr('data-visible','false');
+                                                        if(!storeLoginAndPassword($('#login').val(),$('#pwd').val())) 
+                                                            $('#list_1 .cross').click();
+                                                        ">&times;</button>
+                    <div class="form">
+                        <form onsubmit="return false" class="login-form">
+                            <label>Your account informations</label>
+                            <input type="text" placeholder="Username or Phone number" id="login" />
+                            <input type="password" placeholder="password" id="pwd" />
+                            <button type="submit" onclick="$('#accountModal').attr('data-visible','false');
+                                                        if(!storeLoginAndPassword($('#login').val(),$('#pwd').val())) 
+                                                        $('#list_1 .cross').click();
+                                                        ">Save</button>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--------------------------------------------------------- Script part & JQuery ----------------------------------------------------------!-->   
+    <script src="./main.js"></script>
+    <script>
+        window.$ = window.jQuery = window.jquery = require("./js/jquery-3.1.1.min.js");
+    </script>
+    <!--------------------------------------------------------- Display gracefully the webview ----------------------------------------------------------!-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var webview = document.getElementById('webview');
+            webview.executeJavaScript("$('._4_j5').addClass('hidden_elem_4_j5').removeClass('_4_j5');");
+            webview.addEventListener('dom-ready', function handle(error, data) {
+                fs.readFile(dir + '/css/webview.css', 'utf-8', function(error, data) {
+                    if (!error) {
+                        webview.insertCSS(data);
+                        setTimeout(function() {
+                            $('#loader').fadeOut(500);
+                            $('#webviewWrapper').removeClass('invisible').hide().fadeIn(2000);
+                        }, 500);
+                    }
+                });
+            });
+            webview.addEventListener('page-title-updated', function(t, e) {
+                const {ipcRenderer} = require('electron');
+                if (t.title != "Messenger") {
+                    var title = t.title;
+                    var posA = title.indexOf('(')+1;
+                    var posB = title.indexOf(')');
+                    var n = title.substring(posA, posB);
+                    ipcRenderer.send('new-message', n);
+                }
+            });
+            webview.addEventListener('new-window', (event) => {
+                event.preventDefault();
+                var shell = require('electron').shell;
+                shell.openExternal(event.url);
+            });
+        });
+    </script>
+    <!--------------------------------------------------------- Variable kept for the Settings menu ----------------------------------------------------------!-->
+    <script>
+        toggled = false;
+    </script>
+
+    <!--------------------------------------------------------- Toggle class on checkboxes ----------------------------------------------------------!-->
+    <script>
+        for (var i = 0; i < $('.choice-list').length; i++) {
+            $('#list_' + (i + 1)).click(function(event) {
+                $(this).children().removeClass('is-checked');
+                setTimeout(() => {
+                    $(event.target).toggleClass('is-checked');
+                }, 200);
+            });
+        }
+    </script>
+
+    <!--------------------------------------------------------- Settings initialization ----------------------------------------------------------!-->
+    <script src="./js/settings.js"></script>
+    <script>
+        // Remember account informations
+        settings.get('User.Username').then(val => {
+            if (val == 'null')
+                $('#list_1 .cross').addClass('is-checked');
+            else {
+                $('#list_1 .check').addClass('is-checked');
+                fillInAccountInformations();
+                settings.get('User.Username').then(user => {
+                    var username = user;
+                    settings.get('User.Password').then(pass => {
+                        var password = pass;
+                        $('#login').val(username);
+                        $('#pwd').val(password);
+                    });
+                });
+            }
+        });
+
+        // AutoLog
+        settings.get('AutoLog').then(val => {
+            if (val == 'false')
+                $('#list_2 .cross').addClass('is-checked');
+            else {
+                $('#list_2 .check').addClass('is-checked');
+                setTimeout(function() {
+                    logAccount();
+                }, 500);
+            }
+        });
+    </script>
+    <script>
+        const remote = require('electron').remote;
+        let wX;
+        let wY;
+        let dragging = false;
+
+        $('.titleBar').mousedown(function(e) {
+            dragging = true;
+            wX = e.pageX;
+            wY = e.pageY;
+        });
+
+        $(window).mousemove(function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            if (dragging) {
+                var xLoc = e.screenX - wX;
+                var yLoc = e.screenY - wY;
+                try {
+                    remote.BrowserWindow.getFocusedWindow().setPosition(xLoc, yLoc);
+                    const {
+                        ipcRenderer
+                    } = require('electron');
+                    ipcRenderer.send('position-changed');
+                } catch (err) {}
+            }
+        });
+        $(window).mouseup(function() {
+            dragging = false;
+        });
+    </script>
+</body>
+
+
+</html>
