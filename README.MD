@@ -1,7 +1,7 @@
 
 <h1 align='center'>
-  <img alt='Opale-Messenger' src='./resources/icone.png'>
   Opale Messenger 
+  <img alt='Opale-Messenger' src='./images/icone.png'>
 </h1>
 
 <p align="justify">
