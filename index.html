@@ -124,6 +124,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
             var webview = document.getElementById('webview');
+            // This line removes the right sidebar
             webview.executeJavaScript("$('._4_j5').addClass('hidden_elem_4_j5').removeClass('_4_j5');");
             webview.addEventListener('dom-ready', function handle(error, data) {
                 fs.readFile(dir + '/css/webview.css', 'utf-8', function(error, data) {

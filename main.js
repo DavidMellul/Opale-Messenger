@@ -110,12 +110,11 @@ app.on('ready', function () {
             bubble.webContents.send('new-message', '');
         }
     });
-    
-    globalShortcut.register('Alt+Q',() => {
-        if(bubble.isVisible()) {
-          bubble.hide();
-         }
-        else {
+
+    globalShortcut.register('Alt+Q', () => {
+        if (bubble.isVisible()) {
+            bubble.hide();
+        } else {
             bubble.show();
         }
     });
@@ -144,21 +143,30 @@ app.on('ready', function () {
     bubble.loadURL(filePath + '/bubble.html');
 
     // Tray part. It allows the user to hide/show the bubble, and to quit the application
-    if (process.platform != 'darwin')
+    if (process.platform != 'darwin') {
         tray = new Tray(path.join(__dirname, '/images/tray.png'));
-    else
+        tray.on('click', () => {
+            bubble.isVisible() ? bubble.hide() : bubble.show();
+        });
+    } else
         tray = new Tray(path.join(__dirname, '/images/osxTray.png'));
- 
-    tray.on('click', () => {
-        bubble.isVisible() ? bubble.hide() : bubble.show();
-    });
-    const template = [{
+
+
+    const template = [
+            {
+            label: 'Toggle bubble',
+            role: 'show',
+            click() {
+                bubble.isVisible() ? bubble.hide() : bubble.show();
+            }
+            },
+            {
             label: 'Quit',
             role: 'close',
             click() {
                 bubble.close();
             }
-    }
+            }
     ];
     tray.setContextMenu(Menu.buildFromTemplate(template));
     tray.setToolTip('Opale');
@@ -264,13 +272,13 @@ function buildContextMenu() {
     require('electron-context-menu')({
         window: bubble,
         prepend: (params, window) => [
-        {
+            {
                 label: "Hide",
                 click() {
                     bubble.hide();
                 }
         },
-        {
+            {
                 label: "Quit",
                 click() {
                     bubble.close();
