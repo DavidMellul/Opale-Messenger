@@ -22,7 +22,7 @@ multi-tasking and you just don't want to switch between tabs or windows slowly s
 - Shortcuts which you can use to show/hide the bubble or show/hide the chat.
 - Some settings allowing you to save your account informations and to log you automatically in Messenger.
 - The bubble keeps always on top so that you can always have it right under the hand.
-- Opale Messenger keeps in your system tray, and the bubble can be hidden by right-cliking on it, or left-cliking on the tray-icon.
+- Opale Messenger keeps in your system tray, and the bubble can be toggled by right-cliking on it.
 
 ## Keyboard shortcuts
 
@@ -45,14 +45,18 @@ $ npm start
 ## Platforms supported
 
 Since I'm developing Opale Messenger on Windows, everything should work fine on any Windows OS. <br />
-Since Electron is cross-platform, it should also work well on Mac OS X but I can't ensure it.
+Since Electron is cross-platform, it should also work well on Mac OS X but I can't ensure it. <br />
+(I've tested Opale Messenger on Mac OS Sierra thank's to vmware, everything seems alright.)
 
 
 ## Builds and Installers
 
 <p align="justify">Till now (the 20 January 2017 when I'm writing) the only installer I've been making (with electron-packager and innoSetup) is for Windows 32 bits, so that it works on both operating systems no matter it's architecture is wheter x86 or x64.</p>
 
+
 <strong>Installer for Windows 32-64 bits : http://dmware.fr/opale/opale_setup.exe</strong> <br />
+<strong>DMG for Mac OS 64 bits : http://dmware.fr/opale/opale_setup.dmg</strong> <br />
+
 <strong>Important:  Your antivirus may consider checking the installer and the launcher the first time, nevermind I didn't sign my software, nothing to worry about.</strong>
 
 
@@ -64,7 +68,7 @@ I would consider being a lot more greatful if someone  could package the app so 
 
 ## Bugs and Issues
 
-If you catch any suspect behavior or anything you could simply describe as an "issue" / "bug", please post an issue / pull request about it.
+If you catch any suspect behavior or anything you could simply describe as an "issue" / "bug", please post an issue / pull request about it. 
 
 ## Disclaimer 
 
