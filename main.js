@@ -144,7 +144,11 @@ app.on('ready', function () {
     bubble.loadURL(filePath + '/bubble.html');
 
     // Tray part. It allows the user to hide/show the bubble, and to quit the application
-    tray = new Tray(path.join(__dirname, '/images/tray.png'));
+    if (process.platform != 'darwin')
+        tray = new Tray(path.join(__dirname, '/images/tray.png'));
+    else
+        tray = new Tray(path.join(__dirname, '/images/osxTray.png'));
+ 
     tray.on('click', () => {
         bubble.isVisible() ? bubble.hide() : bubble.show();
     });
@@ -159,12 +163,6 @@ app.on('ready', function () {
     tray.setContextMenu(Menu.buildFromTemplate(template));
     tray.setToolTip('Opale');
 
-    bubble.on('show', () => {
-        tray.setHighlightMode('always');
-    });
-    bubble.on('hide', () => {
-        tray.setHighlightMode('never');
-    });
     bubble.webContents.on('did-finish-load', () => {
         bubble.show();
     });
@@ -235,7 +233,7 @@ function createMainWindow() {
     });
 
     mainWindow.loadURL(filePath + '/index.html');
-   // mainWindow.setMenu(null);
+    mainWindow.setMenu(null);
 
     // This event is triggered when the window is unfocused
     mainWindow.on('blur', () => {
