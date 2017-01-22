@@ -235,7 +235,7 @@ function createMainWindow() {
     });
 
     mainWindow.loadURL(filePath + '/index.html');
-   // mainWindow.setMenu(null);
+    mainWindow.setMenu(null);
 
     // This event is triggered when the window is unfocused
     mainWindow.on('blur', () => {
