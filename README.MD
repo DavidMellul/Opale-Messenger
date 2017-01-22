@@ -30,6 +30,7 @@ Description            | Keys
 -----------------------| -----------------------
 Toggle bubble          | <kbd>Alt</kbd> <kbd>Q</kbd>
 Toggle chat window     | <kbd>Alt</kbd> <kbd>A</kbd>
+Unfocus the bubble     | <kbd>Alt</kbd> <kbd>Z</kbd>
 
 
 
