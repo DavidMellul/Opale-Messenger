@@ -55,7 +55,7 @@ Since Electron is cross-platform, it should also work well on Mac OS X but I can
 
 
 <strong>Installer for Windows 32-64 bits : http://dmware.fr/opale/opale_setup.exe</strong> <br />
-<strong>DMG for Mac OS 64 bits : http://dmware.fr/opale/opale_setup.dmg</strong> <br />
+<strong>DMG for Mac OS 64 bits : http://dmware.fr/opale/opale.dmg</strong> <br />
 
 <strong>Important:  Your antivirus may consider checking the installer and the launcher the first time, nevermind I didn't sign my software, nothing to worry about.</strong>
 
@@ -63,7 +63,7 @@ Since Electron is cross-platform, it should also work well on Mac OS X but I can
 ## Further improvements
 
 
-I would be very glad if someone could give me a feedback or just tell me how I could simply improve. <br />
+I would be glad if someone could give me a feedback or just tell me how I could simply improve. <br />
 I would consider being a lot more greatful if someone  could package the app so that users could use Opale Messenger on both Windows and Mac (Linux maybe ?) with an installer. (<strong> ---> Further teamworking on cool projects ?</strong>)
 
 ## Bugs and Issues
