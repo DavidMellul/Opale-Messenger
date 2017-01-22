@@ -31,7 +31,6 @@ const {
 } = require('electron');
 const app = electron.app;
 const globalShortcut = require('electron').globalShortcut;
-const shell = electron.shell;
 
 /*
  *
@@ -145,7 +144,7 @@ app.on('ready', function () {
     bubble.loadURL(filePath + '/bubble.html');
 
     // Tray part. It allows the user to hide/show the bubble, and to quit the application
-    tray = new Tray(path.join(__dirname, '/images/icone.png'));
+    tray = new Tray(path.join(__dirname, '/images/tray.png'));
     tray.on('click', () => {
         bubble.isVisible() ? bubble.hide() : bubble.show();
     });
