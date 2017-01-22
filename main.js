@@ -118,6 +118,11 @@ app.on('ready', function () {
             bubble.show();
         }
     });
+    
+    globalShortcut.register('Alt+Z', () => {
+        bubble.blur();
+    });
+    
 });
 
 // Triggered when the app is created and ready to use, this one creates the window responsible for displaying the bubble
@@ -132,8 +137,9 @@ app.on('ready', function () {
         maxHeight: bH,
         frame: false,
         show: false,
-        icon: './images/icone.ico',
         alwaysOnTop: true,
+        type: 'toolbar',
+        icon: './images/icone.ico',
         transparent: true,
         acceptFirstMouse: true,
         resizable: false,
@@ -144,7 +150,7 @@ app.on('ready', function () {
     });
     bubble.setMenu(null);
     bubble.loadURL(filePath + '/bubble.html');
-
+    
     // Tray part. It allows the user to hide/show the bubble, and to quit the application
     if (process.platform != 'darwin') {
         tray = new Tray(path.join(__dirname, '/images/tray.png'));
@@ -175,7 +181,7 @@ app.on('ready', function () {
     tray.setToolTip('Opale');
 
     bubble.webContents.on('did-finish-load', () => {
-        bubble.show();
+        bubble.showInactive();
     });
 
     // When a new window is created, open it in the default browser so that we don't have to handle it in our electron app
@@ -238,6 +244,7 @@ function createMainWindow() {
         resizable: true,
         acceptFirstMouse: true,
         skipTaskbar: true,
+        type: 'toolbar',
         webPreferences: {
             nodeIntegration: true
         }
