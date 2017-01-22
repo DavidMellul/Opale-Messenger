@@ -122,6 +122,9 @@ app.on('ready', function () {
 
 // Triggered when the app is created and ready to use, this one creates the window responsible for displaying the bubble
 app.on('ready', function () {
+    if(process.platform == 'darwin') 
+        app.dock.hide();
+        
     bubble = new BrowserWindow({
         width: bW,
         height: bH,
