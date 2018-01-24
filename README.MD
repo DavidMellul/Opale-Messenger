@@ -73,7 +73,7 @@ If you catch any suspect behavior or anything you could simply describe as an "i
 
 ## Disclaimer 
 
-<strong>Remark 1: I'm a student in computer sciences, I'm mainly focused on software development, please be constructive and keen on anything you could think is bullshit since I've almost never experienced web development more than some tricky webdesign and some AJAX (JQuery / JS / PHP). </strong><br /><br />
+<strong>Remark 1: I'm a student in computer science, I'm mainly focused on software development, please be constructive and keen on anything you could think is a bad habit since I've almost never experienced web development more than some tricky webdesign and some AJAX (JQuery / JS / PHP). </strong><br /><br />
 <strong>Remark 2: I don't believe I'll have time to maintain this project or to make it better since it's purpose was to train cross-platform hybrid software development, any help would be sincerely very appreciated.</strong>
 
 ## License
