@@ -45,9 +45,12 @@ $ npm start
 
 ## Platforms supported
 
-Since I'm developing Opale Messenger on Windows, everything should work fine on any Windows OS. <br />
-Since Electron is cross-platform, it should also work well on Mac OS X but I can't ensure it. <br />
-(I've tested Opale Messenger on Mac OS Sierra thank's to vmware, everything seems alright.)
+Since I'm developing Opale Messenger on Windows, everything should work fine on any Windows OS. <br /><br />
+Since Electron is cross-platform, it should also work well on Mac OS X & Linux but I can't ensure it. <br />
+
+I've tested Opale Messenger on Mac OS Sierra thank's to vmware, everything seems alright.<br />
+Thank's to <a href="https://github.com/svin83">@svin83</a> who has tested on Linux Mint Mate, Opale works on this Linux distribution and certainly on other distros (**Note: The bubble's background doesn't work well on Linux -> <a href="https://github.com/DavidMellul/Opale-Messenger/issues/2"> see issue</a>**).
+
 
 
 ## Builds and Installers
@@ -57,6 +60,7 @@ Since Electron is cross-platform, it should also work well on Mac OS X but I can
 
 <strong>Installer for Windows 32-64 bits : http://dmware.fr/opale/opale_setup.exe</strong> <br />
 <strong>DMG for Mac OS 64 bits : http://dmware.fr/opale/opale.dmg</strong> <br />
+<strong>For Linux users, simply follow the command-line steps</strong><br />
 
 <strong>Important:  Your antivirus may consider checking the installer and the launcher the first time, nevermind I didn't sign my software, nothing to worry about.</strong>
 
